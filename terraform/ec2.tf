@@ -29,11 +29,18 @@ resource "aws_launch_template" "app_lt" {
 #!/bin/bash
 set -xe
 apt-get update -y
-apt-get install -y apache2 awscli
+apt-get install -y apache2 curl unzip
 systemctl enable apache2
 systemctl start apache2
+
+cd /tmp
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip -o awscliv2.zip
+./aws/install
+
 aws s3 cp s3://${aws_s3_bucket.app_bucket.bucket}/index.html /var/www/html/index.html
 aws s3 cp s3://${aws_s3_bucket.app_bucket.bucket}/style.css /var/www/html/style.css
+
 systemctl restart apache2
 EOF
   )
