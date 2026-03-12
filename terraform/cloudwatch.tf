@@ -30,9 +30,9 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
 
   alarm_description = "Scale out if CPU > 70%"
   alarm_actions = [
-  aws_autoscaling_policy.scale_out.arn,
-  aws_sns_topic.alerts.arn
-]
+    aws_autoscaling_policy.scale_out.arn,
+    aws_sns_topic.alerts.arn
+  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_low" {

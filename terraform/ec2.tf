@@ -21,13 +21,20 @@ resource "aws_launch_template" "app_lt" {
 
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2_instance_profile.name
+  }
+
   user_data = base64encode(<<-EOF
 #!/bin/bash
-apt update -y
-apt install -y apache2
+set -xe
+apt-get update -y
+apt-get install -y apache2 awscli
 systemctl enable apache2
 systemctl start apache2
-echo "<h1>Three-Tier Application Deployed via Terraform</h1>" > /var/www/html/index.html
+aws s3 cp s3://${aws_s3_bucket.app_bucket.bucket}/index.html /var/www/html/index.html
+aws s3 cp s3://${aws_s3_bucket.app_bucket.bucket}/style.css /var/www/html/style.css
+systemctl restart apache2
 EOF
   )
 
