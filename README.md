@@ -52,19 +52,19 @@ Website files are downloaded from S3 during EC2 instance startup.
 
 ## Deployment Steps
 
-# Step 1 – Clone the Repository
+### Step 1 – Clone the Repository
 
 Clone the GitHub repository containing the Terraform project.
 
 Navigate into the project directory.
 
-# Step 2 – Configure AWS Access
+### Step 2 – Configure AWS Access
 
 Configure AWS CLI credentials on your system so Terraform can interact with AWS resources.
 
 Verify that your account has permissions to create networking, compute, storage, and database resources.
 
-# Step 3 – Prepare Terraform Backend
+### Step 3 – Prepare Terraform Backend
 
 Create the Terraform backend infrastructure used to store state remotely.
 
@@ -76,7 +76,7 @@ A DynamoDB table for state locking
 
 Remote state ensures safe collaboration and prevents infrastructure conflicts.
 
-# Step 4 – Initialize Terraform
+### Step 4 – Initialize Terraform
 
 Navigate into the Terraform infrastructure directory.
 
@@ -88,19 +88,19 @@ Configure backend storage
 
 Prepare the working directory
 
-# Step 5 – Review Infrastructure Plan
+### Step 5 – Review Infrastructure Plan
 
 Run a Terraform plan to review the resources that will be created.
 
 This step validates configuration and shows a preview of infrastructure changes.
 
-# Step 6 – Deploy Infrastructure
+### Step 6 – Deploy Infrastructure
 
 Apply the Terraform configuration to create AWS resources.
 
 Terraform will provision the following components:
 
-# Networking Layer
+### Networking Layer
 
 Virtual Private Cloud (VPC)
 
@@ -110,13 +110,13 @@ Internet Gateway
 
 Route Tables
 
-# Security Layer
+### Security Layer
 
 Security Groups for ALB, EC2, and RDS
 
 IAM Role for EC2 access to S3
 
-# Application Layer
+### Application Layer
 
 Application Load Balancer
 
@@ -128,29 +128,29 @@ Auto Scaling Group
 
 EC2 instances
 
-# Data Layer
+### Data Layer
 
 Amazon RDS MySQL database
 
 Database subnet group
 
-# Storage
+### Storage
 
 Amazon S3 bucket for website assets
 
-# Monitoring
+### Monitoring
 
 CloudWatch alarms
 
 Auto Scaling policies
 
-# Step 7 – Upload Website Files to S3
+### Step 7 – Upload Website Files to S3
 
 Upload the website application files to the S3 bucket.
 
 These files are automatically downloaded by EC2 instances during startup and served through the Apache web server.
 
-# Step 8 – Auto Scaling Instance Initialization
+### Step 8 – Auto Scaling Instance Initialization
 
 When EC2 instances launch:
 
@@ -166,7 +166,7 @@ Starts the Apache service
 
 The instance then registers with the load balancer target group.
 
-# Step 9 – Verify Infrastructure
+### Step 9 – Verify Infrastructure
 
 After deployment completes, verify the infrastructure in the AWS console:
 
@@ -182,7 +182,7 @@ RDS database status is available
 
 CloudWatch alarms are configured
 
-# Step 10 – Access the Application
+### Step 10 – Access the Application
 
 Terraform outputs the Application Load Balancer DNS name after deployment.
 
@@ -192,7 +192,7 @@ The request flow is:
 
 User → Load Balancer → EC2 Instance → Website Content
 
-# Monitoring and Scaling
+### Monitoring and Scaling
 
 CloudWatch monitors CPU utilization of EC2 instances.
 
@@ -204,7 +204,7 @@ CPU < 30%	Terminate extra instance
 
 This ensures automatic scaling based on traffic demand.
 
-# Security Design
+### Security Design
 
 Security is implemented using:
 
@@ -240,8 +240,3 @@ AWS RDS
 AWS CloudWatch
 
 ---
-
-## Author
-
-Madhan Kumar
-Cloud & DevOps Learner
